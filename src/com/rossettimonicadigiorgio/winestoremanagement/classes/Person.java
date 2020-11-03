@@ -7,6 +7,7 @@ public abstract class Person {
  private String Name;
  private String Surname;
  private String Email;
+ private String Password;
  private List<Wine> AvailabilityNotification;
 
  public Person(String name,String surname,String email,List<Wine> availabilitynotification)
@@ -22,6 +23,8 @@ public abstract class Person {
  protected String getSurname() { return this.Surname; }
  
  protected String getEmail() { return this.Email; }
+ 
+ protected String getPassword() { return this.Password; }
  
  protected List<Wine> getAvailabilityNotification(){return this.AvailabilityNotification;}
  

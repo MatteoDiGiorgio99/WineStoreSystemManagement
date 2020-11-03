@@ -8,9 +8,9 @@ public class Order {
 	private Person User;
 	private List<Wine> Wines;
 
-	public Order(StatusEnum status,Person user,List<Wine> wines)
+	public Order(Person user,List<Wine> wines)
 	{
-		this.Status=status;
+		this.Status=StatusEnum.Confirmed;
 		this.User=user;
 		this.Wines=wines;
 	}

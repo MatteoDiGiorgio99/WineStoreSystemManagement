@@ -22,7 +22,8 @@ public class Wine {
 	
 	protected int ProcessOrder(int bottlesnumber)
 	{
-		return bottlesnumber; //temporaneo
+		this.BottlesNumber-=bottlesnumber;
+		return this.BottlesNumber;
 	}
 	
 	protected String getName() { return this.Name; }
@@ -38,4 +39,14 @@ public class Wine {
 	protected void setBottlesNumber(int newBottlesNumber) { this.BottlesNumber = newBottlesNumber ; }
 
 	protected List<String> getVines(){return this.Vines;}
+	
+	protected boolean CheckAvailability() {return (this.BottlesNumber>0);}
+	
+	protected boolean EqualTo(Wine wine) {
+	     if(wine.Name==this.Name && wine.Producer==this.Producer && wine.Year==this.Year )
+	     {
+	    	  return true;
+	     }    
+	   return false;
+	}
 }
