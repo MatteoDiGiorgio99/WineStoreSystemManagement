@@ -25,21 +25,25 @@ public class Wine {
 		return this.BottlesNumber;
 	}
 	
-	protected String getName() { return this.Name; }
+	public Wine clone() {
+		return new Wine(this.Name, this.Producer, this.Year, this.Notes, this.BottlesNumber, this.Vines);
+	}
 	
-	protected String getProducer() { return this.Producer; }
+	public String getName() { return this.Name; }
 	
-	protected int getYear() { return this.Year; }
+	public String getProducer() { return this.Producer; }
 	
-	protected String getNotes() { return this.Notes; }
+	public int getYear() { return this.Year; }
 	
-	protected int getBottlesNumber() { return this.BottlesNumber; }
+	public String getNotes() { return this.Notes; }
 	
-	protected void setBottlesNumber(int newBottlesNumber) { this.BottlesNumber = newBottlesNumber; }
+	public int getBottlesNumber() { return this.BottlesNumber; }
+	
+	public void setBottlesNumber(int newBottlesNumber) { this.BottlesNumber = newBottlesNumber; }
 
-	protected List<String> getVines() { return this.Vines; }
+	public List<String> getVines() { return this.Vines; }
 	
-	protected boolean CheckAvailability() { return this.BottlesNumber > 0; }
+	public boolean CheckAvailability() { return this.BottlesNumber > 0; }
 	
 	protected boolean Restock(int numberofbottles) { this.BottlesNumber += numberofbottles; return true; }
 	

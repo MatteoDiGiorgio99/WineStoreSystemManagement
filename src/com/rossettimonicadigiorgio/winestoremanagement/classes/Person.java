@@ -6,11 +6,12 @@ public abstract class Person {
 	 private String Email;
 	 private String Password;
 	
-	 public Person(String name, String surname, String email)
+	 public Person(String name, String surname, String email, String password)
 	 {
 		 this.Name = name;
 		 this.Surname = surname;
 		 this.Email = email;
+		 this.Password = password;
 	 }
 	 
 	 protected String getName() {return this.Name;}

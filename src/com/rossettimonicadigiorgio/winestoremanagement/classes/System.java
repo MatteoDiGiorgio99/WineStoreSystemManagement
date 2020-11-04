@@ -2,19 +2,29 @@ package com.rossettimonicadigiorgio.winestoremanagement.classes;
 import java.util.*;
 
 public class System {
-	private ArrayList<Wine> Wines;
-	private ArrayList<Person> Users;
-	private ArrayList<Order> Orders;
+	private ArrayList<Wine> wines;
+	private ArrayList<User> users;
+	private ArrayList<Employee> employees; 
+	private ArrayList<Order> orders;
 	
-	public System (ArrayList<Wine> wines, ArrayList<Person> users, ArrayList<Order> orders)
+	public System (ArrayList<Wine> wines, ArrayList<User> users, ArrayList<Employee> emplyees)
 	{
-		this.Wines = wines;
-		this.Users = users;
-		this.Orders = orders;
+		this.wines = wines;
+		this.users = users;
+		this.employees = emplyees;
+		this.orders = new ArrayList<Order>();
 	}
 	
-	Person Login(String email,String password) throws IllegalAccessException {
-		for (Person person : this.Users) {
+	public ArrayList<Wine> getWines() {
+		return this.wines;
+	}
+	
+	public ArrayList<Order> getOrder() {
+		return this.orders;
+	}
+	
+	public Person Login(String email,String password) throws IllegalAccessException {
+		for (Person person : this.users) {
 			if(person.getEmail() == email && person.getPassword() == password)
 			{
 				return person;
@@ -24,15 +34,15 @@ public class System {
 		throw new IllegalAccessException();
 	}
 	
-	boolean RegisterUser(Person person) {
+	public boolean RegisterUser(User person) {
 		if(person == null) 
 			return false;
 		
-		return this.Users.add(person);
+		return this.users.add(person);
 	}
 	
-	Wine FindWine(String name, String producer, int year) { 
-		for (Wine wine : this.Wines) {
+	public Wine FindWine(String name, String producer, int year) { 
+		for (Wine wine : this.wines) {
 			if(wine.EqualTo(name, producer, year))
 				return wine;
 		}
@@ -40,14 +50,14 @@ public class System {
 		return null;
 	}
 	
-	boolean BuyOrder(Person user, ArrayList<Wine> wines) {
+	public Order BuyOrder(Person user, ArrayList<Wine> wines) {
 		
 		for (Wine wine : wines) {
 			if(!wine.CheckAvailability()) {
-				return false;
+				return null;
 			}
 			
-			for (Wine globalwine: this.Wines)  {
+			for (Wine globalwine: this.wines)  {
 			   if(globalwine.EqualTo(wine))
 			   {
 				   globalwine.ProcessOrder(wine.getBottlesNumber());
@@ -56,17 +66,17 @@ public class System {
 		}
 		
 		Order order = new Order(user,wines); 
-		this.Orders.add(order);
+		this.orders.add(order);
 		
-		return true;
+		return order;
 	}
 	
-	boolean ShipOrder(Order order) {
+	public boolean ShipOrder(Order order) {
 		if(order == null) {
 			return false;
 		}
 		
-		Order orderToShip = this.Orders.get(this.Orders.indexOf(order));
+		Order orderToShip = this.orders.get(this.orders.indexOf(order));
 		
 		if(orderToShip == null) 
 			return false;
@@ -74,12 +84,29 @@ public class System {
 		return orderToShip.ship();
 	}
 	
-	boolean StockWine(Employee user, Wine type, int numberOfBottles) {
-		return false;
+	public boolean StockWine(Employee user, Wine type, int numberOfBottles) {
+		if(user == null)		
+			return false;
+		
+		if(this.employees.indexOf(user) < 0)
+			return false;
+		
+		int winenum = this.wines.indexOf(type);
+		
+		if(winenum < 0)
+			return false;
+		
+		if(!type.Restock(numberOfBottles))
+			return false;
+		
+		this.wines.remove(winenum);
+		this.wines.add(winenum, type);
+		
+		return true;
 	}
 	
 	private Wine FindWine(Wine wine) { 
-		for (Wine globalwine : this.Wines) {
+		for (Wine globalwine : this.wines) {
 			if(globalwine.EqualTo(wine))
 				return wine;
 		}
