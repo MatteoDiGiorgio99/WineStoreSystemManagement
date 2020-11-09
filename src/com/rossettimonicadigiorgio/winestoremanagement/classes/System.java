@@ -1,6 +1,12 @@
 package com.rossettimonicadigiorgio.winestoremanagement.classes;
 import java.util.*;
 
+/**
+ * The {@code System} is a class that defines:
+ * The wine store behaviors
+ * @author 296666
+ *
+ */
 public class System {
 	private ArrayList<Wine> wines;
 	private ArrayList<User> users;
@@ -8,6 +14,12 @@ public class System {
 	private ArrayList<Order> orders;
 	private ArrayList<Notification> notifications;
 	
+	/**
+	 * Class constructor
+	 * @param wines the first set of wines
+	 * @param users the first set of users
+	 * @param emplyees the first set of employees
+	 */
 	public System (ArrayList<Wine> wines, ArrayList<User> users, ArrayList<Employee> emplyees)
 	{
 		this.wines = wines;
@@ -17,14 +29,29 @@ public class System {
 		this.notifications = new ArrayList<Notification>();
 	}
 	
+	/**
+	 * Fetch the list of wines
+	 * @return a list of wines
+	 */
 	public ArrayList<Wine> getWines() {
 		return this.wines;
 	}
 	
+	/**
+	 * Fetch the list of order
+	 * @return the list of order
+	 */
 	public ArrayList<Order> getOrder() {
 		return this.orders;
 	}
 	
+	/**
+	 * The method Login 
+	 * @param email of the user
+	 * @param password of the user
+	 * @return person
+	 * @throws IllegalAccessException if the credentials are wrong
+	 */
 	public Person Login(String email,String password) throws IllegalAccessException {
 		for (Person person : this.users) {
 			if(person.getEmail() == email && person.getPassword() == password)
@@ -43,6 +70,11 @@ public class System {
 		throw new IllegalAccessException();
 	}
 	
+	/**
+	 * The method Register
+	 * @param person
+	 * @return the user that has just been created
+	 */
 	public boolean RegisterUser(User person) {
 		if(person == null) 
 			return false;
@@ -50,6 +82,13 @@ public class System {
 		return this.users.add(person);
 	}
 	
+	/**
+	 * The method FindWine
+	 * @param name of the wine
+	 * @param producer of the wine
+	 * @param year of production the wine 
+	 * @return the wine we have just searched
+	 */
 	public Wine FindWine(String name, String producer, int year) { 
 		for (Wine wine : this.wines) {
 			if(wine.EqualTo(name, producer, year))
@@ -59,6 +98,13 @@ public class System {
 		return null;
 	}
 	
+	/**
+	 * The method BuyOrder
+	 * @param user want to buy 
+	 * @param wines the user want to buy
+	 * @param getNotified if the wine user wants is finished
+	 * @return the created order
+	 */
 	public Order BuyOrder(User user, ArrayList<Wine> wines, boolean getNotified) {
 		ArrayList<Wine> notAvailable = new ArrayList<Wine>();
 		
@@ -94,6 +140,11 @@ public class System {
 		return null;
 	}
 	
+	/**
+	 * The method ShipOrder
+	 * @param order we want to ship
+	 * @return order to ship
+	 */
 	public boolean ShipOrder(Order order) {
 		if(order == null) {
 			return false;
@@ -107,6 +158,13 @@ public class System {
 		return orderToShip.ship();
 	}
 	
+	/**
+	 * The method StockWine
+	 * @param user the employee want to make the action
+	 * @param type of the wine to stock
+	 * @param numberOfBottles we want to add
+	 * @return the number of user to be notify about the new stock
+	 */
 	public ArrayList<Notification> StockWine(Employee user, Wine type, int numberOfBottles) {
 		if(user == null)		
 			return null;
@@ -128,6 +186,12 @@ public class System {
 		return notifyUsers(type);
 	}
 	
+	/**
+	 * The method SubscribeNotification
+	 * @param user to be notified
+	 * @param wine that the user wants to be notified about 
+	 * @return if the request of notification has been inserted successfully
+	 */
 	public boolean subscribeNotification(User user, Wine wine) {
 		if(user == null)
 			return false;
@@ -142,6 +206,11 @@ public class System {
 		return true;
 	}
 	
+	/**
+	 * The method NotifyUser
+	 * @param wine the wine to look for
+	 * @return the notifications
+	 */
 	private ArrayList<Notification> notifyUsers(Wine wine) {
 		ArrayList<Notification> results = new ArrayList<Notification>();
 		
@@ -159,6 +228,11 @@ public class System {
 		return results;
 	}
 	
+	/**
+	 * The method FindWine
+	 * @param wine to search
+	 * @return the wine if has bee found
+	 */
 	private Wine FindWine(Wine wine) { 
 		for (Wine globalwine : this.wines) {
 			if(globalwine.EqualTo(wine))
@@ -168,6 +242,11 @@ public class System {
 		return null;
 	}
 	
+	/**
+	 * The method FindWinePosition
+	 * @param wine the wine to search
+	 * @return the position the wine in the list
+	 */
 	private int FindWinePosition(Wine wine) { 
 		for (int i = 0; i < this.wines.size(); i++) {
 			if((this.wines.get(i)).EqualTo(wine))
