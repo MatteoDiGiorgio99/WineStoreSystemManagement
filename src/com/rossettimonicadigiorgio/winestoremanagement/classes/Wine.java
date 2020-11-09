@@ -39,11 +39,15 @@ public class Wine {
 	/**
 	 * Decrements number of bottles
 	 * @param bottlesnumber purchased bottles number
-	 * @return number of bottles left
+	 * @return if the order has been processed correctly
 	 */
-	protected int ProcessOrder(int bottlesnumber) {
+	protected boolean ProcessOrder(int bottlesnumber) {
+		if(this.BottlesNumber - bottlesnumber < 0)
+			return false;
+		
 		this.BottlesNumber -= bottlesnumber;
-		return this.BottlesNumber;
+				
+		return true;
 	}
 	
 	/**

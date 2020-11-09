@@ -47,5 +47,5 @@ public class Order {
 	 * Fetch wines that has been ordered 
 	 * @return wines that has been ordered
 	 */
-	protected List<Wine> getWines() { return this.Wines; }
+	public List<Wine> getWines() { return this.Wines; }
 }

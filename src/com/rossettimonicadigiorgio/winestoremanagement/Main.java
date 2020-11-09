@@ -24,11 +24,14 @@ public class Main {
 		java.lang.System.out.println("UY Bottles before purchase: " + wines.get(wines.size() - 1).getBottlesNumber());
 		
 		/// User Registration
-		User UX = new User("provaregistrazione", "provaregistrazione", "provaregistrazione@aa.it", "1234");
+		User UX = new User("UX", "UX", "UX@example.it", "1234");
 		system.RegisterUser(UX);
 		
-		User UY = new User("provaregistrazione", "provaregistrazione", "provaregistrazione@aa.it", "1234");
+		User UY = new User("UY", "UY", "UY@example.it", "1234");
 		system.RegisterUser(UY);
+		
+		User UZ = new User("UZ", "UZ", "UZ@example.it", "1234");
+		system.RegisterUser(UZ);
 		
 		/// Test buy UX
 		ArrayList<Wine> tobuy = new ArrayList<Wine>();
@@ -36,7 +39,7 @@ public class Main {
 		wine1.setBottlesNumber(1);
 		tobuy.add(wine1);
 		
-		system.BuyOrder(UX, tobuy);
+		system.BuyOrder(UX, tobuy, false);
 		
 		tobuy.clear();
 		
@@ -44,13 +47,32 @@ public class Main {
 		Wine wine2 = wines.get(wines.size() - 1).clone();
 		tobuy.add(wine2);
 		
-		system.BuyOrder(UY, tobuy);
+		system.BuyOrder(UY, tobuy, false);
 		
 		wines = system.getWines();
 		
 		java.lang.System.out.println("UX Bottles after purchase: " + wines.get(0).getBottlesNumber());
 		java.lang.System.out.println("UY Bottles after purchase: " + wines.get(wines.size() - 1).getBottlesNumber());
-		java.lang.System.out.println("Numero ordini eseguiti: " + system.getOrder().size());
+		java.lang.System.out.println("Orders created: " + system.getOrder().size());
+		
+		/// Test Buy UZ
+		tobuy.clear();
+		Wine wineUZ = system.FindWine("wine1", "prod1", 2017);
+		wineUZ.setBottlesNumber(2);
+		tobuy.add(wineUZ);
+		system.BuyOrder(UZ, tobuy, true);
+		
+		/// Restock Employee
+		try {
+			Employee employee = (Employee) system.Login("emp1@example.it", "1234");
+			var notifications = system.StockWine(employee, system.FindWine("wine1", "prod1", 2017), 10);
+			
+			for (Notification notification : notifications) {
+				java.lang.System.out.println("Notification for " + notification.getUser().getName() + ". Wine " + notification.getWine().getName() + " is now available");
+			}
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}		
 	}
 
 	
@@ -67,7 +89,7 @@ public class Main {
 	private static ArrayList<Employee> initEmployees() {
 		ArrayList<Employee> employees = new ArrayList<Employee>();
 		
-		employees.add(new Employee("emp1", "emp1", "emp1@aa.it", "1234"));
+		employees.add(new Employee("emp1", "emp1", "emp1@example.it", "1234"));
 		
 		return employees;
 	}
@@ -82,7 +104,7 @@ public class Main {
 		
 		
 		wines.add(new Wine("wine1", "prod1", 2019, "note1", 3, vines));
-		wines.add(new Wine("wine1", "prod1", 2018, "note2", 2, vines));
+		wines.add(new Wine("wine2", "prod1", 2018, "note2", 2, vines));
 		wines.add(new Wine("wine1", "prod1", 2017, "note3", 5, vines));
 		
 		return wines;

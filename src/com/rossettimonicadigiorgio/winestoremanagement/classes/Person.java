@@ -31,7 +31,7 @@ public abstract class Person {
 	  * Fetch name of the person
 	  * @return name of the person
 	  */
-	 protected String getName() {return this.Name;}
+	 public String getName() {return this.Name;}
 	 
 	 /**
 	  * Fetch surname of the person
