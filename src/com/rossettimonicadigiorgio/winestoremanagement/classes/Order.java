@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class Order {
 	private StatusEnum Status; 
-	private Person User;
+	private User User;
 	private ArrayList<Wine> Wines;
 	
 	/**
@@ -18,7 +18,7 @@ public class Order {
 	 * @param user that made the order
 	 * @param wines that is been ordered
 	 */
-	public Order(Person user, ArrayList<Wine> wines)
+	public Order(User user, ArrayList<Wine> wines)
 	{
 		this.Status = StatusEnum.Confirmed;
 		this.User = user;
@@ -41,7 +41,7 @@ public class Order {
 	 * Fetch user's data
 	 * @return user's data
 	 */
-	protected Person getUser() { return this.User; }
+	protected User getUser() { return this.User; }
 	
 	/**
 	 * Fetch wines that has been ordered 
