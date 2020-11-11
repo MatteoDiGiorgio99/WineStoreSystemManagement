@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * The {@code Order} is a class that defines:
  * an order made by a user 
- * @author 297398
+ * @author 297402
  *
  */
 public class Order {

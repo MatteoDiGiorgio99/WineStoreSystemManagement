@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.rossettimonicadigiorgio.winestoremanagement"},{"l":"com.rossettimonicadigiorgio.winestoremanagement.classes"}]

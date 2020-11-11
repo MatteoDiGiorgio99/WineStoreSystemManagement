@@ -2,7 +2,7 @@ package com.rossettimonicadigiorgio.winestoremanagement.classes;
 
 /**
  * The {@code StatusEnum} defines the status of an order 
- * @author 297398
+ * @author 297402
  *
  */
 public enum StatusEnum {

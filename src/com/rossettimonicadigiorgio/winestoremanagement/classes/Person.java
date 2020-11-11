@@ -3,7 +3,7 @@ package com.rossettimonicadigiorgio.winestoremanagement.classes;
 /**
  * The {@code Person} is a class that defines:
  * details of every person that can access to the system
- * @author 297402
+ * @author 297398
  *
  */
 public abstract class Person {

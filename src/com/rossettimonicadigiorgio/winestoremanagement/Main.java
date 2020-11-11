@@ -11,7 +11,8 @@ import com.rossettimonicadigiorgio.winestoremanagement.classes.System;
 public class Main {
 
 	/**
-	 * @param args
+	 * Point of entry for the application
+	 * @param args the arguments for the application to run
 	 */
 	public static void main(String[] args) {		
 		ArrayList<User> users = initUsers();
@@ -66,6 +67,7 @@ public class Main {
 		try {
 			Employee employee = (Employee) system.Login("emp1@example.it", "1234");
 			var notifications = system.StockWine(employee, system.FindWine("wine1", "prod1", 2017), 10);
+			java.lang.System.out.println("Stock of wine completed");
 			
 			for (Notification notification : notifications) {
 				java.lang.System.out.println("Notification for " + notification.getUser().getName() + ". Wine " + notification.getWine().getName() + " is now available");
@@ -75,7 +77,10 @@ public class Main {
 		}		
 	}
 
-	
+	/** 
+	 * Default list of users registered to the system
+	 * @return the list of users
+	 */
 	private static ArrayList<User> initUsers() {
 		ArrayList<User> users = new ArrayList<User>();
 		
@@ -86,6 +91,10 @@ public class Main {
 		return users;
 	}
 	
+	/** 
+	 * Default list of employees registered to the system
+	 * @return the list of employees
+	 */
 	private static ArrayList<Employee> initEmployees() {
 		ArrayList<Employee> employees = new ArrayList<Employee>();
 		
@@ -94,6 +103,10 @@ public class Main {
 		return employees;
 	}
 	
+	/** 
+	 * Default list of wines registered to the system
+	 * @return the list of wines
+	 */
 	private static ArrayList<Wine> initWines() {
 		ArrayList<Wine> wines = new ArrayList<Wine>();
 		
